@@ -13,17 +13,17 @@ class ImageGalleryService implements ImageGalleryInterface {
     /**
      * @var ImageRepositoryInterface
      */
-    protected $imageRepository;
+    private $imageRepository;
 
     /**
      * @var TagRepositoryInterface
      */
-    protected $tagRepository;
+    private $tagRepository;
 
     /**
      * @var StorageRepository
      */
-    protected $storageRepository;
+    private $storageRepository;
 
     /**
      * ImageGalleryService constructor.
@@ -41,13 +41,10 @@ class ImageGalleryService implements ImageGalleryInterface {
         $this->storageRepository = $storageRepository;
     }
 
-    /**
-     * @param array $data
-     */
     public function addImagesToGallery(array $data)
     {
         foreach($data['images'] as $img) {
-            $storagePath = $this->storageRepository->putImageToLocalStorage($img['image']);
+            $storagePath = $this->storageRepository->putFileToLocalStorage($img['image']);
             $publicPath = $this->storageRepository->getLocalStoragePublicUrl($storagePath);
 
             $image = $this->imageRepository->createImage($img['title'], $publicPath);
@@ -59,20 +56,11 @@ class ImageGalleryService implements ImageGalleryInterface {
         }
     }
 
-    /**
-     * @param int $count
-     * @return mixed
-     */
     public function getAllImages(int $count = 15)
     {
         return $this->imageRepository->getImagesWithPagination($count);
     }
 
-    /**
-     * @param string $filter
-     * @param int $count
-     * @return mixed
-     */
     public function getImagesByFilter(string $filter, int $count = 15)
     {
         return $this->imageRepository->getImagesByFilterWithPagination($filter, $count);

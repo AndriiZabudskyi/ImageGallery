@@ -10,7 +10,7 @@ class ImageController extends Controller
     /**
      * @var ImageGalleryInterface
      */
-    protected $imageGalleryService;
+    private $imageGalleryService;
 
     /**
      * ImageController constructor.

@@ -7,13 +7,17 @@ use Illuminate\Http\UploadedFile;
 interface StorageRepositoryInterface
 {
     /**
-     * @param $image
+     * Put UploadedFile to local storage
+     *
+     * @param $file
      * @return mixed
      */
-    public function putImageToLocalStorage(UploadedFile $image);
+    public function putFileToLocalStorage(UploadedFile $file);
 
     /**
-     * @param string $path
+     * Get local storage public url by storage path (start with 'public/')
+     *
+     * @param string $path - storage path (start with '\storage\')
      * @return mixed
      */
     public function getLocalStoragePublicUrl(string $path);

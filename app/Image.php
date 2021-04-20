@@ -10,6 +10,10 @@ class Image extends Model
 
     protected $guarded = [];
 
+    /**
+     * Configure belongs-to-many Tag relationship
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function tags() {
         return $this->belongsToMany(Tag::class)
             ->withTimestamps();

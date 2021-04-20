@@ -9,10 +9,9 @@ class TagController extends Controller
     /**
      * @var TagRepositoryInterface
      */
-    protected $tagRepository;
+    private $tagRepository;
 
     /**
-     * TagController constructor.
      * @param TagRepositoryInterface $tagRepository
      */
     public function __construct(TagRepositoryInterface $tagRepository)
@@ -21,7 +20,9 @@ class TagController extends Controller
     }
 
     /**
-     * @return mixed
+     * Fetch all tags
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function getAllTags() {
         return response()->json([

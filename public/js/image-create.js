@@ -1,6 +1,7 @@
 $(document).ready(function() {
     /**
      * Init ajax request to fetch tags from server
+     *
      * @returns {*|{getAllResponseHeaders, abort, setRequestHeader, readyState, getResponseHeader, overrideMimeType, statusCode}}
      */
     function loadAvailableTags() {
@@ -33,14 +34,15 @@ $(document).ready(function() {
 
     /**
      * Create options for select tag
-     * @param data
+     *
+     * @param tags - tags data object
      * @returns {string}
      */
-    function createSelectOptions(data){
+    function createSelectOptions(tags){
         var selectOptions = '';
 
-        $.each(data.tags, function (index, item) {
-            selectOptions += "<option value='" + item['name'] + "'>" + item['name'] +  "</option>";
+        $.each(tags, function (index, tag) {
+            selectOptions += "<option value='" + tag['name'] + "'>" + tag['name'] +  "</option>";
         });
 
         return selectOptions;
@@ -48,8 +50,9 @@ $(document).ready(function() {
 
     /**
      * Create files preview with additional fields
-     * @param files
-     * @param tagsSelectOptions
+     *
+     * @param files - uploaded files
+     * @param tagsSelectOptions - string of multiple tag <option>
      */
     function createFilesPreview(files, tagsSelectOptions) {
         $.each(files, function(index, file){
@@ -85,7 +88,8 @@ $(document).ready(function() {
     }
 
     /**
-     * Build formData object for Ajax request
+     * Build formData object for Ajax request from title and tags related to image
+     *
      * @returns {FormData}
      */
     function getFormData() {
@@ -106,7 +110,8 @@ $(document).ready(function() {
 
     /**
      * Create File from data URL
-     * @param src
+     *
+     * @param src - data url from src attribute
      * @param filename
      * @returns {File}
      */
@@ -127,7 +132,7 @@ $(document).ready(function() {
     /**
      * Parse errors for user-friendly view
      *
-     * @param errorsToParse
+     * @param errorsToParse - object of errors
      * @returns {string}
      */
     function parseErrors(errorsToParse) {
@@ -158,7 +163,7 @@ $(document).ready(function() {
 
         loadAvailableTags()
             .then(response => {
-                var tagsSelectOptions = createSelectOptions(response);
+                var tagsSelectOptions = createSelectOptions(response.tags);
                 createFilesPreview($(this)[0].files, tagsSelectOptions);
             });
     });

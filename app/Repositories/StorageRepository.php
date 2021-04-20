@@ -8,19 +8,11 @@ use Illuminate\Support\Facades\Storage;
 
 class StorageRepository implements StorageRepositoryInterface
 {
-    /**
-     * @param UploadedFile $image
-     * @return bool|mixed
-     */
-    public function putImageToLocalStorage(UploadedFile $image)
+    public function putFileToLocalStorage(UploadedFile $file)
     {
-        return Storage::disk('local')->put('public/images', $image, 'public');
+        return Storage::disk('local')->put('public/images', $file, 'public');
     }
 
-    /**
-     * @param string $path
-     * @return mixed
-     */
     public function getLocalStoragePublicUrl(string $path)
     {
         return Storage::url($path);
