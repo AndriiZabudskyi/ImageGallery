@@ -23,6 +23,21 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->app->bind(
+            \App\Services\Interfaces\ImageGalleryInterface::class,
+            \App\Services\ImageGalleryService::class
+        );
+        $this->app->bind(
+            \App\Repositories\Interfaces\TagRepositoryInterface::class,
+            \App\Repositories\TagRepository::class
+        );
+        $this->app->bind(
+            \App\Repositories\Interfaces\ImageRepositoryInterface::class,
+            \App\Repositories\ImageRepository::class
+        );
+        $this->app->bind(
+            \App\Repositories\Interfaces\StorageRepositoryInterface::class,
+            \App\Repositories\StorageRepository::class
+        );
     }
 }

@@ -13,4 +13,6 @@
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
-Route::resource('image-gallery', 'ImageGalleryController');
+Route::get('/get-all-tags', ['as' => 'tags.all', 'uses' => 'TagController@getAllTags']);
+
+Route::resource('image-gallery', 'ImageController');
